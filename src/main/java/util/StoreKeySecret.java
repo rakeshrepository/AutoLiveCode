@@ -1,6 +1,7 @@
 package util;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -51,7 +52,16 @@ public class StoreKeySecret {
         return value;
     }
 
-    public String generateRandomKey() {
-        return UUID.randomUUID().toString();
+    public String generateRandomKey(int lengthOfKey) {
+        String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < lengthOfKey; i++) {
+            int randomNumber = random.nextInt(candidateChars.length());
+            sb.append(candidateChars.charAt(randomNumber));
+        }
+        return sb.toString();
     }
 }

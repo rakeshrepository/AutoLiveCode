@@ -78,17 +78,18 @@ public class StoreKeySecretTest {
     @Test
     @DisplayName("Random key generate test case")
     public void generateRandomKeyTest() {
-        assertNotNull(storeKeySecret.generateRandomKey());
+        assertNotNull(storeKeySecret.generateRandomKey(20));
     }
 
     @Test
     @DisplayName("Random key generate test case")
     public void generateRandomKeyToStoreTest() {
-        String key = storeKeySecret.generateRandomKey();
+        String key = storeKeySecret.generateRandomKey(20);
         String value = "random key value";
         storeKeySecret.storeSecrets(key, value);
         String secValue = storeKeySecret.getSecret(key);
         assertEquals(value, secValue);
+        assertEquals(20, key.length());
 
     }
 
